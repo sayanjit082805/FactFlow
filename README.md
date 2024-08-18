@@ -1,15 +1,11 @@
-
 # FactFlow
 
 FactFlow is a web-based application which fetches random facts. Powered by the API Ninjas facts API.
 
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) 
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![React](https://img.shields.io/badge/react-374151.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-CBD5E1.svg?style=for-the-badge&logo=tailwind-css&logoColor=38bdf8)
 ![Vite](https://img.shields.io/badge/Vite-9333EA.svg?style=for-the-badge&logo=vite&logoColor=fff)
-
-> [!Warning]
-> This is a work in progress and thus some features are yet to be implemented.
 
 ## Features
 
@@ -18,20 +14,15 @@ FactFlow is a web-based application which fetches random facts. Powered by the A
 - Toast notifications using [react-toastify](https://fkhadra.github.io/react-toastify/introduction/).
 - Small loading animations using [React Spinners](https://mhnpd.github.io/react-loader-spinner/).
 
-
 # Showcase
-
 
 ## Screenshots
 
 ![](https://raw.githubusercontent.com/sayanjit082805/FactFlow/main/demo/ss1.png)
 
-
 ![](https://raw.githubusercontent.com/sayanjit082805/FactFlow/main/demo/ss2.png)
 
-
 ![](https://raw.githubusercontent.com/sayanjit082805/FactFlow/main/demo/ss3.png)
-
 
 ## Prerequisites
 
@@ -65,11 +56,9 @@ VITE_API_KEY = 'your-api-key'
 - Start the application with `npm run dev`.
 - Next, open your browser and navigate to `http://localhost:5173` or the port as specified by vite.
 
-
-
 ## Acknowledgements
 
- - The API is provided by API-Ninjas.
+- The API is provided by API-Ninjas.
 
 ## Contributing
 
@@ -77,16 +66,12 @@ Contributions are always welcome!
 
 - Fork the repository
 
-- Create a new branch ```(git checkout -b feature-branch)```
+- Create a new branch `(git checkout -b feature-branch)`
 
-- Commit your changes ```(git commit -m 'Add new feature')```
+- Commit your changes `(git commit -m 'Add new feature')`
 
 - Open a pull request
-
-
 
 ## License
 
 This project is licensed under the Unlicense License. See the [LICENSE](LICENSE) file for details.
-
-

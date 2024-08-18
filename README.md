@@ -30,6 +30,9 @@ FactFlow is a web-based application which fetches random facts. Powered by the A
 ![](https://raw.githubusercontent.com/sayanjit082805/FactFlow/main/demo/ss2.png)
 
 
+![](https://raw.githubusercontent.com/sayanjit082805/FactFlow/main/demo/ss3.png)
+
+
 ## Prerequisites
 
 - Node.js (v-14 or later)

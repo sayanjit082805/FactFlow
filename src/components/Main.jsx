@@ -4,7 +4,9 @@ import Typed from "typed.js";
 import { motion } from "framer-motion";
 import { Triangle } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
+import { Tooltip } from "react-tooltip";
 import "react-toastify/dist/ReactToastify.css";
+import "react-tooltip/dist/react-tooltip.css";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -15,6 +17,9 @@ function Facts() {
   const [error, setError] = useState(null);
   const [saved, setSaved] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [bookmarkClick, setBookmarkClick] = useState(false);
+  const [copyClick, setCopyClick] = useState(false);
   const el = useRef(null);
 
   useEffect(() => {
@@ -34,6 +39,8 @@ function Facts() {
 
   async function getFact() {
     setLoading(true);
+    setBookmarkClick(false);
+    setCopyClick(false);
     try {
       const response = await fetch("https://api.api-ninjas.com/v1/facts", {
         headers: { "X-Api-Key": apiKey },
@@ -68,7 +75,8 @@ function Facts() {
 
   function copyToClipboard(fact) {
     navigator.clipboard.writeText(fact);
-    toast.success("Copied to clipboard", {
+    setCopyClick(true);
+    toast.info("Copied to clipboard", {
       position: "top-right",
       autoClose: 4000,
       hideProgressBar: false,
@@ -86,6 +94,7 @@ function Facts() {
 
   function handleSaveFact(fact) {
     setSaved([...saved, fact]);
+    setBookmarkClick(true);
     toast.success("Bookmarked!", {
       position: "top-right",
       autoClose: 4000,
@@ -98,9 +107,40 @@ function Facts() {
     });
   }
 
+  function handleClearAll() {
+    if (saved.length === 0) {
+      toast.warn("No bookmarks to clear!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: { background: "#e2e8f0", color: "#0f172a" },
+      });
+    } else {
+      setSaved([]);
+      toast.success("All bookmarks cleared!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        style: { background: "#e2e8f0", color: "#0f172a" },
+      });
+    }
+  }
+
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
   }
+
+  const filteredFacts = saved.filter((fact) =>
+    fact.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
@@ -135,14 +175,31 @@ function Facts() {
               <i className="fas fa-times text-xl"></i>
             </motion.button>
           </div>
-          <li className="p-4 m-2">
-            {saved.map((fact, index) => (
-              <ul key={index} className="my-2">
-                {fact + "."}
-                <hr className="my-2 rounded-lg border-1 border-neutral-900" />
-              </ul>
-            ))}
-          </li>
+          <div className="p-4">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-full p-2 mb-4 border rounded"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <motion.button
+              className="w-full p-2 mb-4 bg-red-500 text-white rounded"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={handleClearAll}
+            >
+              Clear All
+            </motion.button>
+            <ul className="p-4 m-2">
+              {filteredFacts.map((fact, index) => (
+                <ul key={index} className="my-2">
+                  {fact + "."}
+                  <hr className="my-2 rounded-lg border-1 border-neutral-900" />
+                </ul>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
       <div className="flex flex-col items-center w-full max-w-[600px] p-20 shadow-2xl rounded-xl bg-neutral-900 m-5 border-2 border-slate-200">
@@ -177,25 +234,45 @@ function Facts() {
                 whileTap={{ scale: 0.9 }}
                 className="mt-5 px-4 py-2 bg-yellow-400 text-black font-bold rounded-lg flex items-center mr-3"
                 onClick={() => copyToClipboard(fact)}
+                data-tooltip-id="copy"
+                data-tooltip-content="Copy"
+                data-tooltip-place="top"
               >
-                <i className="fas fa-clipboard text-2xl"></i>
+                {copyClick ? (
+                  <i className="fas fa-clipboard text-2xl"></i>
+                ) : (
+                  <i className="fa-regular fa-clipboard text-2xl"></i>
+                )}
               </motion.button>
+              <Tooltip id="copy" />
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 className="mt-5 px-4 py-2 bg-red-400 text-black font-bold rounded-lg flex items-center mr-3"
                 onClick={() => handleSaveFact(fact)}
+                data-tooltip-id="bookmark"
+                data-tooltip-content="Bookmark"
+                data-tooltip-place="top"
               >
-                <i className="fas fa-bookmark text-2xl"></i>
+                {bookmarkClick ? (
+                  <i className="fas fa-bookmark text-2xl"></i>
+                ) : (
+                  <i className="fa-regular fa-bookmark text-2xl"></i>
+                )}
               </motion.button>
+              <Tooltip id="bookmark" />
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 className="mt-5 py-2 px-4 bg-emerald-400 text-black font-bold rounded-lg flex items-center"
                 onClick={() => handleGetFact()}
+                data-tooltip-id="generate"
+                data-tooltip-content="Generate"
+                data-tooltip-place="top"
               >
                 <i className="fas fa-sync-alt text-2xl"></i>
               </motion.button>
+              <Tooltip id="generate" />
             </div>
           </>
         )}

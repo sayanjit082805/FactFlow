@@ -16,6 +16,13 @@ FactFlow is a web-based application which fetches random facts. Powered by the A
 
 # Showcase
 
+# Demo 
+
+
+https://github.com/user-attachments/assets/d1ea8934-94d8-4910-813e-33e14378594d
+
+
+
 ## Screenshots
 
 ![](https://raw.githubusercontent.com/sayanjit082805/FactFlow/main/demo/ss1.png)

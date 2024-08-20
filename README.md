@@ -9,10 +9,12 @@ FactFlow is a web-based application which fetches random facts. Powered by the A
 
 ## Features
 
-- Get thousands of andom facts.
+- Get thousands of random facts.
 - Powered by [API-Ninjas](https://api-ninjas.com).
+- Bookmarks-save your favourite facts
 - Toast notifications using [react-toastify](https://fkhadra.github.io/react-toastify/introduction/).
 - Small loading animations using [React Spinners](https://mhnpd.github.io/react-loader-spinner/).
+
 
 # Showcase
 
